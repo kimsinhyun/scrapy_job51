@@ -1,3 +1,5 @@
+FEED_EXPORT_ENCODING = 'utf-8'
+
 # Scrapy settings for job51_spider project
 #
 # For simplicity, this file contains only settings considered important or
@@ -12,7 +14,6 @@ BOT_NAME = 'job51_spider'
 SPIDER_MODULES = ['job51_spider.spiders']
 NEWSPIDER_MODULE = 'job51_spider.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'job51_spider (+http://www.yourdomain.com)'
 
@@ -25,7 +26,7 @@ CONCURRENT_REQUESTS = 1
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16

@@ -3,13 +3,16 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-from http.client import HTTPResponse
 from scrapy import signals
+import time
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 import job51_spider.chromDriverSetting as ChromeSetting
 from scrapy.http import HtmlResponse
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains 
 
 class SeleniumMiddleWare:
     # Not all methods need to be defined. If a method is not defined,
@@ -37,8 +40,21 @@ class SeleniumMiddleWare:
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
         self.browser.get(request.url)
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        return HTTPResponse(url=request.url, body=self.browser.page_source, request=request, encoding="utf-8", status=200)
+        time.sleep(2)
+        try:
+            anti_bot_slider = self.browser.find_element(By.XPATH,'//*[@id="nc_1_n1z"]')
+            self.break_anti_bot(anti_bot_slider)
+        except:
+            pass
+        print(self.browser.page_source)
+        return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding="utf-8", status=200)
+
+    def break_anti_bot(self,anti_bot_slider):
+        ActionChains(self.browser).click_and_hold(anti_bot_slider).perform()
+        for i in range(275):
+            ActionChains(self.browser).move_by_offset(i, 0).perform()
+            time.sleep(0.03)
+        ActionChains(self.browser).release().perform()
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
@@ -62,6 +78,8 @@ class SeleniumMiddleWare:
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
+    def spider_closed(self):
+            self.browser.quit()
 
 
 

@@ -1,7 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import chromedriver_autoinstaller
-
+from selenium.webdriver.remote.remote_connection import LOGGER
+import logging
+LOGGER.setLevel(logging.WARNING)
 import os
 
 class Spoofer(object):
