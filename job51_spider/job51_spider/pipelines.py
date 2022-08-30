@@ -8,6 +8,8 @@
 from itemadapter import ItemAdapter
 
 
-class TutorialPipeline:
+class Job51SpiderPipeline:
     def process_item(self, item, spider):
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        # print(response.body)
         return item

@@ -17,7 +17,6 @@ class Spoofer(object):
 #         return ua, ip
         return ua
 
-
 class DriverOptions(object):
      def __init__(self ):
         cookie_dir = str(os.path.abspath(os.getcwd())) + "\\cookies\\" +str(1) + '\Chrome_cookie'
@@ -48,11 +47,11 @@ class WebDriver(DriverOptions,object):
         webdriver.DesiredCapabilities.CHROME['acceptSslCerts'] = True
         chrome_ver = chromedriver_autoinstaller.get_chrome_version().split('.')[0]  #크롬드라이버 버전 확인
 
-        try:
-            driver = webdriver.Chrome(f'./ChromeDriver{chrome_ver}/chromedriver.exe',options=self.options)   
+        try:     
+            driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe',options=self.options)   
         except:
             chromedriver_autoinstaller.install(True)
-            driver = webdriver.Chrome(f'./ChromeDriver{chrome_ver}/chromedriver.exe',options=self.options)
+            driver = webdriver.Chrome(f'./{chrome_ver}/chromedriver.exe',options=self.options)
 #         driver = webdriver.Chrome(path, options=self.options)
         driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
@@ -62,3 +61,4 @@ class WebDriver(DriverOptions,object):
                 "navigator.__proto__ = newProto;"
         })
         return driver
+

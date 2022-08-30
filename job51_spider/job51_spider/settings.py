@@ -1,4 +1,4 @@
-# Scrapy settings for tutorial project
+# Scrapy settings for job51_spider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,20 +7,20 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'tutorial'
+BOT_NAME = 'job51_spider'
 
-SPIDER_MODULES = ['tutorial.spiders']
-NEWSPIDER_MODULE = 'tutorial.spiders'
+SPIDER_MODULES = ['job51_spider.spiders']
+NEWSPIDER_MODULE = 'job51_spider.spiders'
 
-FEED_EXPORT_ENCODING = 'utf-8'
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'tutorial (+http://www.yourdomain.com)'
+#USER_AGENT = 'job51_spider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
@@ -45,14 +45,14 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'tutorial.middlewares.TutorialSpiderMiddleware': 543,
+#    'job51_spider.middlewares.Job51SpiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'tutorial.middlewares.TutorialDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'job51_spider.middlewares.SeleniumMiddleWare': 543,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -62,9 +62,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'tutorial.pipelines.TutorialPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'job51_spider.pipelines.Job51SpiderPipeline': 200,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
